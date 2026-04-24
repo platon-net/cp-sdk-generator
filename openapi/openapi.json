@@ -1,0 +1,2563 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "title": "Platon OpenAPI Engine",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "https://setup.platon.sk/api"
+        }
+    ],
+    "paths": {
+        "/system/hello": {
+            "get": {
+                "tags": [
+                    "System"
+                ],
+                "summary": "Returns greeting message",
+                "operationId": "hello",
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "retval": {
+                                            "type": "integer"
+                                        },
+                                        "msg": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "nullable": true,
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "requestId": {
+                                            "type": "integer",
+                                            "nullable": true
+                                        }
+                                    },
+                                    "required": [
+                                        "status",
+                                        "retval",
+                                        "msg",
+                                        "data",
+                                        "requestId"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/system/revision": {
+            "get": {
+                "tags": [
+                    "System"
+                ],
+                "summary": "Returns revision number of system",
+                "operationId": "revision",
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "retval": {
+                                            "type": "integer"
+                                        },
+                                        "msg": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "nullable": true,
+                                            "properties": {
+                                                "revision": {
+                                                    "type": "integer"
+                                                }
+                                            }
+                                        },
+                                        "requestId": {
+                                            "type": "integer",
+                                            "nullable": true
+                                        }
+                                    },
+                                    "required": [
+                                        "status",
+                                        "retval",
+                                        "msg",
+                                        "data",
+                                        "requestId"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/system/time": {
+            "get": {
+                "tags": [
+                    "System"
+                ],
+                "summary": "Returns current date and time of system",
+                "operationId": "time",
+                "responses": {
+                    "200": {
+                        "description": "Successful response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "retval": {
+                                            "type": "integer"
+                                        },
+                                        "msg": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "nullable": true,
+                                            "properties": {
+                                                "datetime": {
+                                                    "type": "string"
+                                                },
+                                                "timestamp": {
+                                                    "type": "integer"
+                                                }
+                                            }
+                                        },
+                                        "requestId": {
+                                            "type": "integer",
+                                            "nullable": true
+                                        }
+                                    },
+                                    "required": [
+                                        "status",
+                                        "retval",
+                                        "msg",
+                                        "data",
+                                        "requestId"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/oauth/scopes": {
+            "get": {
+                "tags": [
+                    "OAuth"
+                ],
+                "summary": "List available OAuth scopes",
+                "operationId": "getOauthScopes",
+                "responses": {
+                    "200": {
+                        "description": "OAuth scopes response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "retval": {
+                                            "type": "integer"
+                                        },
+                                        "msg": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "nullable": true,
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "name": {
+                                                        "type": "string"
+                                                    },
+                                                    "description": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "required": [
+                                                    "name",
+                                                    "description"
+                                                ]
+                                            }
+                                        },
+                                        "requestId": {
+                                            "type": "integer",
+                                            "nullable": true
+                                        }
+                                    },
+                                    "required": [
+                                        "status",
+                                        "retval",
+                                        "msg",
+                                        "data",
+                                        "requestId"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/oauth/requests": {
+            "post": {
+                "tags": [
+                    "OAuth"
+                ],
+                "summary": "Create OAuth request",
+                "operationId": "createOauthRequest",
+                "responses": {
+                    "200": {
+                        "description": "OAuth create response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "retval": {
+                                            "type": "integer"
+                                        },
+                                        "msg": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "nullable": true,
+                                            "properties": {
+                                                "verify_token": {
+                                                    "type": "string"
+                                                },
+                                                "access_token": {
+                                                    "type": "string"
+                                                },
+                                                "redirect_url": {
+                                                    "type": "string"
+                                                },
+                                                "verify_url": {
+                                                    "type": "string"
+                                                },
+                                                "verify_interval_seconds": {
+                                                    "type": "integer"
+                                                }
+                                            }
+                                        },
+                                        "requestId": {
+                                            "type": "integer",
+                                            "nullable": true
+                                        }
+                                    },
+                                    "required": [
+                                        "status",
+                                        "retval",
+                                        "msg",
+                                        "data",
+                                        "requestId"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "requestBody": {
+                    "description": "OAuth create payload",
+                    "required": false,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "app_name": {
+                                        "type": "string"
+                                    },
+                                    "app_url_homepage": {
+                                        "type": "string"
+                                    },
+                                    "app_url_return": {
+                                        "type": "string"
+                                    },
+                                    "scopes": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/oauth/requests/verify": {
+            "get": {
+                "tags": [
+                    "OAuth"
+                ],
+                "summary": "Verify OAuth request",
+                "operationId": "verifyOauthRequest",
+                "responses": {
+                    "200": {
+                        "description": "OAuth verify response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "retval": {
+                                            "type": "integer"
+                                        },
+                                        "msg": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "nullable": true,
+                                            "properties": {
+                                                "status": {
+                                                    "type": "string"
+                                                },
+                                                "token": {
+                                                    "type": "string"
+                                                },
+                                                "token_expire": {
+                                                    "type": "string"
+                                                },
+                                                "cname": {
+                                                    "type": "string"
+                                                },
+                                                "error": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "requestId": {
+                                            "type": "integer",
+                                            "nullable": true
+                                        }
+                                    },
+                                    "required": [
+                                        "status",
+                                        "retval",
+                                        "msg",
+                                        "data",
+                                        "requestId"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "verify_token",
+                        "in": "query",
+                        "required": true,
+                        "description": "Verify token from OAuth create response",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ]
+            }
+        },
+        "/oauth/tokens/refresh": {
+            "post": {
+                "tags": [
+                    "OAuth"
+                ],
+                "summary": "Refresh OAuth token",
+                "operationId": "refreshOauthToken",
+                "responses": {
+                    "200": {
+                        "description": "OAuth refresh response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "retval": {
+                                            "type": "integer"
+                                        },
+                                        "msg": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "nullable": true,
+                                            "properties": {
+                                                "status": {
+                                                    "type": "string"
+                                                },
+                                                "token": {
+                                                    "type": "string"
+                                                },
+                                                "token_expire": {
+                                                    "type": "string"
+                                                },
+                                                "cname": {
+                                                    "type": "string"
+                                                },
+                                                "error": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "requestId": {
+                                            "type": "integer",
+                                            "nullable": true
+                                        }
+                                    },
+                                    "required": [
+                                        "status",
+                                        "retval",
+                                        "msg",
+                                        "data",
+                                        "requestId"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "requestBody": {
+                    "description": "OAuth refresh payload",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "token": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "token"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": [
+                            "oauth:refresh"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/oauth/tokens": {
+            "delete": {
+                "tags": [
+                    "OAuth"
+                ],
+                "summary": "Delete OAuth token",
+                "operationId": "deleteOauthToken",
+                "responses": {
+                    "200": {
+                        "description": "OAuth delete response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "retval": {
+                                            "type": "integer"
+                                        },
+                                        "msg": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "nullable": true,
+                                            "properties": {
+                                                "status": {
+                                                    "type": "string"
+                                                },
+                                                "error": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "requestId": {
+                                            "type": "integer",
+                                            "nullable": true
+                                        }
+                                    },
+                                    "required": [
+                                        "status",
+                                        "retval",
+                                        "msg",
+                                        "data",
+                                        "requestId"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "query",
+                        "required": true,
+                        "description": "OAuth token",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "bearerAuth": [
+                            "oauth:delete"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/dns/{domain}/records": {
+            "get": {
+                "tags": [
+                    "DNS"
+                ],
+                "summary": "Get DNS records by domain",
+                "operationId": "getDnsRecords",
+                "responses": {
+                    "200": {
+                        "description": "DNS records response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "retval": {
+                                            "type": "integer"
+                                        },
+                                        "msg": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "nullable": true,
+                                            "properties": {
+                                                "domain_id": {
+                                                    "type": "integer"
+                                                },
+                                                "domain": {
+                                                    "type": "string"
+                                                },
+                                                "master": {
+                                                    "type": "string"
+                                                },
+                                                "type": {
+                                                    "type": "string"
+                                                },
+                                                "records": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "record_id": {
+                                                                "type": "integer"
+                                                            },
+                                                            "type": {
+                                                                "type": "string"
+                                                            },
+                                                            "name": {
+                                                                "type": "string"
+                                                            },
+                                                            "content": {
+                                                                "type": "string"
+                                                            },
+                                                            "ttl": {
+                                                                "type": "integer"
+                                                            },
+                                                            "prio": {
+                                                                "type": "integer"
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "requestId": {
+                                            "type": "integer",
+                                            "nullable": true
+                                        }
+                                    },
+                                    "required": [
+                                        "status",
+                                        "retval",
+                                        "msg",
+                                        "data",
+                                        "requestId"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "domain",
+                        "in": "path",
+                        "required": true,
+                        "description": "Domain name",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "type",
+                        "in": "query",
+                        "required": false,
+                        "description": "Filter records by type",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "bearerAuth": [
+                            "dns:read"
+                        ]
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "DNS"
+                ],
+                "summary": "Create DNS record",
+                "operationId": "createDnsRecord",
+                "responses": {
+                    "200": {
+                        "description": "DNS record create response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "retval": {
+                                            "type": "integer"
+                                        },
+                                        "msg": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "nullable": true
+                                        },
+                                        "requestId": {
+                                            "type": "integer",
+                                            "nullable": true
+                                        }
+                                    },
+                                    "required": [
+                                        "status",
+                                        "retval",
+                                        "msg",
+                                        "data",
+                                        "requestId"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "domain",
+                        "in": "path",
+                        "required": true,
+                        "description": "Domain name",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "DNS record payload",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "type": {
+                                        "type": "string"
+                                    },
+                                    "content": {
+                                        "type": "string"
+                                    },
+                                    "ttl": {
+                                        "type": "integer"
+                                    },
+                                    "prio": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "required": [
+                                    "name",
+                                    "type",
+                                    "content",
+                                    "ttl"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": [
+                            "dns:create"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/dns/{domain}/records/{recordId}": {
+            "patch": {
+                "tags": [
+                    "DNS"
+                ],
+                "summary": "Update DNS record",
+                "operationId": "updateDnsRecord",
+                "responses": {
+                    "200": {
+                        "description": "DNS record update response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "retval": {
+                                            "type": "integer"
+                                        },
+                                        "msg": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "nullable": true
+                                        },
+                                        "requestId": {
+                                            "type": "integer",
+                                            "nullable": true
+                                        }
+                                    },
+                                    "required": [
+                                        "status",
+                                        "retval",
+                                        "msg",
+                                        "data",
+                                        "requestId"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "domain",
+                        "in": "path",
+                        "required": true,
+                        "description": "Domain name",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "recordId",
+                        "in": "path",
+                        "required": true,
+                        "description": "Record ID",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Partial DNS record payload",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "type": {
+                                        "type": "string"
+                                    },
+                                    "content": {
+                                        "type": "string"
+                                    },
+                                    "ttl": {
+                                        "type": "integer"
+                                    },
+                                    "prio": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": [
+                            "dns:update"
+                        ]
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "DNS"
+                ],
+                "summary": "Delete DNS record",
+                "operationId": "deleteDnsRecord",
+                "responses": {
+                    "200": {
+                        "description": "DNS record delete response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "retval": {
+                                            "type": "integer"
+                                        },
+                                        "msg": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "nullable": true
+                                        },
+                                        "requestId": {
+                                            "type": "integer",
+                                            "nullable": true
+                                        }
+                                    },
+                                    "required": [
+                                        "status",
+                                        "retval",
+                                        "msg",
+                                        "data",
+                                        "requestId"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "domain",
+                        "in": "path",
+                        "required": true,
+                        "description": "Domain name",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "recordId",
+                        "in": "path",
+                        "required": true,
+                        "description": "Record ID",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "bearerAuth": [
+                            "dns:delete"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/email/{domain}/mailboxes": {
+            "post": {
+                "tags": [
+                    "Email"
+                ],
+                "summary": "Create mailbox",
+                "operationId": "createMailbox",
+                "responses": {
+                    "200": {
+                        "description": "Mailbox create response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "retval": {
+                                            "type": "integer"
+                                        },
+                                        "msg": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "nullable": true
+                                        },
+                                        "requestId": {
+                                            "type": "integer",
+                                            "nullable": true
+                                        }
+                                    },
+                                    "required": [
+                                        "status",
+                                        "retval",
+                                        "msg",
+                                        "data",
+                                        "requestId"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "domain",
+                        "in": "path",
+                        "required": true,
+                        "description": "Domain name",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Mailbox payload",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "username": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    },
+                                    "name": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "username",
+                                    "password",
+                                    "name"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": [
+                            "email:create"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/email/{domain}/mailboxes/{username}/password": {
+            "patch": {
+                "tags": [
+                    "Email"
+                ],
+                "summary": "Change mailbox password",
+                "operationId": "changeMailboxPassword",
+                "responses": {
+                    "200": {
+                        "description": "Mailbox password change response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "retval": {
+                                            "type": "integer"
+                                        },
+                                        "msg": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "nullable": true
+                                        },
+                                        "requestId": {
+                                            "type": "integer",
+                                            "nullable": true
+                                        }
+                                    },
+                                    "required": [
+                                        "status",
+                                        "retval",
+                                        "msg",
+                                        "data",
+                                        "requestId"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "domain",
+                        "in": "path",
+                        "required": true,
+                        "description": "Domain name",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "username",
+                        "in": "path",
+                        "required": true,
+                        "description": "Mailbox username",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Mailbox password payload",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "password"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": [
+                            "email:update"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/domains/{domain}": {
+            "get": {
+                "tags": [
+                    "Domain"
+                ],
+                "summary": "Get domain information and availability",
+                "operationId": "getDomainInfo",
+                "responses": {
+                    "200": {
+                        "description": "Domain info response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "retval": {
+                                            "type": "integer"
+                                        },
+                                        "msg": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "nullable": true
+                                        },
+                                        "requestId": {
+                                            "type": "integer",
+                                            "nullable": true
+                                        }
+                                    },
+                                    "required": [
+                                        "status",
+                                        "retval",
+                                        "msg",
+                                        "data",
+                                        "requestId"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "domain",
+                        "in": "path",
+                        "required": true,
+                        "description": "Domain name",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "cname",
+                        "in": "query",
+                        "required": false,
+                        "description": "Customer name for product context",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "bearerAuth": [
+                            "domain:read"
+                        ]
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Domain"
+                ],
+                "summary": "Close external customer domain product",
+                "operationId": "closeDomain",
+                "responses": {
+                    "200": {
+                        "description": "Domain close response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "retval": {
+                                            "type": "integer"
+                                        },
+                                        "msg": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "nullable": true
+                                        },
+                                        "requestId": {
+                                            "type": "integer",
+                                            "nullable": true
+                                        }
+                                    },
+                                    "required": [
+                                        "status",
+                                        "retval",
+                                        "msg",
+                                        "data",
+                                        "requestId"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "domain",
+                        "in": "path",
+                        "required": true,
+                        "description": "Domain name",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "cname",
+                        "in": "query",
+                        "required": true,
+                        "description": "Customer name",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "bearerAuth": [
+                            "domain:delete"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/domains/{domain}/register": {
+            "post": {
+                "tags": [
+                    "Domain"
+                ],
+                "summary": "Register domain",
+                "operationId": "registerDomain",
+                "responses": {
+                    "200": {
+                        "description": "Domain register response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "retval": {
+                                            "type": "integer"
+                                        },
+                                        "msg": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "nullable": true
+                                        },
+                                        "requestId": {
+                                            "type": "integer",
+                                            "nullable": true
+                                        }
+                                    },
+                                    "required": [
+                                        "status",
+                                        "retval",
+                                        "msg",
+                                        "data",
+                                        "requestId"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "domain",
+                        "in": "path",
+                        "required": true,
+                        "description": "Domain name",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Domain registration payload",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "cname": {
+                                        "type": "string"
+                                    },
+                                    "period": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "required": [
+                                    "cname"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": [
+                            "domain:create"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/domains/{domain}/renew": {
+            "post": {
+                "tags": [
+                    "Domain"
+                ],
+                "summary": "Renew domain",
+                "operationId": "renewDomain",
+                "responses": {
+                    "200": {
+                        "description": "Domain renew response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "retval": {
+                                            "type": "integer"
+                                        },
+                                        "msg": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "nullable": true
+                                        },
+                                        "requestId": {
+                                            "type": "integer",
+                                            "nullable": true
+                                        }
+                                    },
+                                    "required": [
+                                        "status",
+                                        "retval",
+                                        "msg",
+                                        "data",
+                                        "requestId"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "domain",
+                        "in": "path",
+                        "required": true,
+                        "description": "Domain name",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Domain renewal payload",
+                    "required": false,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "period": {
+                                        "type": "integer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": [
+                            "domain:update"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/domains/{domain}/nameservers": {
+            "patch": {
+                "tags": [
+                    "Domain"
+                ],
+                "summary": "Change domain nameservers",
+                "operationId": "changeDomainNameservers",
+                "responses": {
+                    "200": {
+                        "description": "Domain nameserver change response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "retval": {
+                                            "type": "integer"
+                                        },
+                                        "msg": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "nullable": true
+                                        },
+                                        "requestId": {
+                                            "type": "integer",
+                                            "nullable": true
+                                        }
+                                    },
+                                    "required": [
+                                        "status",
+                                        "retval",
+                                        "msg",
+                                        "data",
+                                        "requestId"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "domain",
+                        "in": "path",
+                        "required": true,
+                        "description": "Domain name",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Nameserver payload",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "cname": {
+                                        "type": "string"
+                                    },
+                                    "dns_servers_opt": {
+                                        "type": "string"
+                                    },
+                                    "ns": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "ns1": {
+                                        "type": "string"
+                                    },
+                                    "ns1_ipv4": {
+                                        "type": "string"
+                                    },
+                                    "ns1_ipv6": {
+                                        "type": "string"
+                                    },
+                                    "ns2": {
+                                        "type": "string"
+                                    },
+                                    "ns2_ipv4": {
+                                        "type": "string"
+                                    },
+                                    "ns2_ipv6": {
+                                        "type": "string"
+                                    },
+                                    "ns3": {
+                                        "type": "string"
+                                    },
+                                    "ns3_ipv4": {
+                                        "type": "string"
+                                    },
+                                    "ns3_ipv6": {
+                                        "type": "string"
+                                    },
+                                    "ns4": {
+                                        "type": "string"
+                                    },
+                                    "ns4_ipv4": {
+                                        "type": "string"
+                                    },
+                                    "ns4_ipv6": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": [
+                            "domain:update"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/domains": {
+            "get": {
+                "tags": [
+                    "Domain"
+                ],
+                "summary": "List customer domains",
+                "operationId": "listDomains",
+                "responses": {
+                    "200": {
+                        "description": "Domain list response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "retval": {
+                                            "type": "integer"
+                                        },
+                                        "msg": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "nullable": true,
+                                            "properties": {
+                                                "count": {
+                                                    "type": "integer"
+                                                },
+                                                "products": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "requestId": {
+                                            "type": "integer",
+                                            "nullable": true
+                                        }
+                                    },
+                                    "required": [
+                                        "status",
+                                        "retval",
+                                        "msg",
+                                        "data",
+                                        "requestId"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "cname",
+                        "in": "query",
+                        "required": true,
+                        "description": "Customer name",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "bearerAuth": [
+                            "domain:read"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/vehicle/vehicles": {
+            "get": {
+                "tags": [
+                    "Vehicle"
+                ],
+                "summary": "List vehicles available to the authenticated driver",
+                "operationId": "listVehicleVehicles",
+                "responses": {
+                    "200": {
+                        "description": "Vehicle list response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "retval": {
+                                            "type": "integer"
+                                        },
+                                        "msg": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "nullable": true
+                                        },
+                                        "requestId": {
+                                            "type": "integer",
+                                            "nullable": true
+                                        }
+                                    },
+                                    "required": [
+                                        "status",
+                                        "retval",
+                                        "msg",
+                                        "data",
+                                        "requestId"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": [
+                            "vehicle:read"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/vehicle/preferred-vehicle": {
+            "patch": {
+                "tags": [
+                    "Vehicle"
+                ],
+                "summary": "Set or clear preferred vehicle",
+                "operationId": "setPreferredVehicle",
+                "responses": {
+                    "200": {
+                        "description": "Preferred vehicle response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "retval": {
+                                            "type": "integer"
+                                        },
+                                        "msg": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "nullable": true
+                                        },
+                                        "requestId": {
+                                            "type": "integer",
+                                            "nullable": true
+                                        }
+                                    },
+                                    "required": [
+                                        "status",
+                                        "retval",
+                                        "msg",
+                                        "data",
+                                        "requestId"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "requestBody": {
+                    "description": "Preferred vehicle payload",
+                    "required": false,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "vehicleId": {
+                                        "type": "string",
+                                        "nullable": true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": [
+                            "vehicle:update"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/vehicle/currencies": {
+            "get": {
+                "tags": [
+                    "Vehicle"
+                ],
+                "summary": "List currencies for vehicle events",
+                "operationId": "listVehicleCurrencies",
+                "responses": {
+                    "200": {
+                        "description": "Vehicle currency list response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "retval": {
+                                            "type": "integer"
+                                        },
+                                        "msg": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "nullable": true
+                                        },
+                                        "requestId": {
+                                            "type": "integer",
+                                            "nullable": true
+                                        }
+                                    },
+                                    "required": [
+                                        "status",
+                                        "retval",
+                                        "msg",
+                                        "data",
+                                        "requestId"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": [
+                            "vehicle:read"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/vehicle/events/receipt-image": {
+            "post": {
+                "tags": [
+                    "Vehicle"
+                ],
+                "summary": "Upload receipt image and create processing event draft",
+                "operationId": "uploadVehicleReceiptImage",
+                "responses": {
+                    "200": {
+                        "description": "Vehicle receipt upload response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "retval": {
+                                            "type": "integer"
+                                        },
+                                        "msg": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "nullable": true
+                                        },
+                                        "requestId": {
+                                            "type": "integer",
+                                            "nullable": true
+                                        }
+                                    },
+                                    "required": [
+                                        "status",
+                                        "retval",
+                                        "msg",
+                                        "data",
+                                        "requestId"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "requestBody": {
+                    "description": "Receipt image upload payload",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "image": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    },
+                                    "timezone": {
+                                        "type": "string"
+                                    },
+                                    "eventType": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "image",
+                                    "timezone"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": [
+                            "vehicle:create"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/vehicle/events/{eventId}/image": {
+            "post": {
+                "tags": [
+                    "Vehicle"
+                ],
+                "summary": "Replace event image and rescan event data",
+                "operationId": "rescanVehicleEventImage",
+                "responses": {
+                    "200": {
+                        "description": "Vehicle event image rescan response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "retval": {
+                                            "type": "integer"
+                                        },
+                                        "msg": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "nullable": true
+                                        },
+                                        "requestId": {
+                                            "type": "integer",
+                                            "nullable": true
+                                        }
+                                    },
+                                    "required": [
+                                        "status",
+                                        "retval",
+                                        "msg",
+                                        "data",
+                                        "requestId"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "eventId",
+                        "in": "path",
+                        "required": true,
+                        "description": "Vehicle event ID",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Event image rescan payload",
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "image": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    },
+                                    "timezone": {
+                                        "type": "string"
+                                    },
+                                    "eventType": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "image"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": [
+                            "vehicle:update"
+                        ]
+                    }
+                ]
+            },
+            "get": {
+                "tags": [
+                    "Vehicle"
+                ],
+                "summary": "Get event image or thumbnail",
+                "operationId": "getVehicleEventImage",
+                "responses": {
+                    "200": {
+                        "description": "Vehicle event image response",
+                        "content": {
+                            "image/*": {
+                                "schema": {
+                                    "type": "string",
+                                    "format": "binary"
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "eventId",
+                        "in": "path",
+                        "required": true,
+                        "description": "Vehicle event ID",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "size",
+                        "in": "query",
+                        "required": false,
+                        "description": "Image size variant: thumb, thumbnail or small for thumbnail response",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "bearerAuth": [
+                            "vehicle:read"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/vehicle/events/{eventId}": {
+            "get": {
+                "tags": [
+                    "Vehicle"
+                ],
+                "summary": "Get vehicle event detail",
+                "operationId": "getVehicleEvent",
+                "responses": {
+                    "200": {
+                        "description": "Vehicle event detail response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "retval": {
+                                            "type": "integer"
+                                        },
+                                        "msg": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "nullable": true
+                                        },
+                                        "requestId": {
+                                            "type": "integer",
+                                            "nullable": true
+                                        }
+                                    },
+                                    "required": [
+                                        "status",
+                                        "retval",
+                                        "msg",
+                                        "data",
+                                        "requestId"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "eventId",
+                        "in": "path",
+                        "required": true,
+                        "description": "Vehicle event ID",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "bearerAuth": [
+                            "vehicle:read"
+                        ]
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Vehicle"
+                ],
+                "summary": "Delete vehicle event",
+                "operationId": "deleteVehicleEvent",
+                "responses": {
+                    "200": {
+                        "description": "Vehicle event delete response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "retval": {
+                                            "type": "integer"
+                                        },
+                                        "msg": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "nullable": true
+                                        },
+                                        "requestId": {
+                                            "type": "integer",
+                                            "nullable": true
+                                        }
+                                    },
+                                    "required": [
+                                        "status",
+                                        "retval",
+                                        "msg",
+                                        "data",
+                                        "requestId"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "eventId",
+                        "in": "path",
+                        "required": true,
+                        "description": "Vehicle event ID",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "bearerAuth": [
+                            "vehicle:delete"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/vehicle/events/{eventId}/finalize": {
+            "post": {
+                "tags": [
+                    "Vehicle"
+                ],
+                "summary": "Finalize vehicle event draft",
+                "operationId": "finalizeVehicleEvent",
+                "responses": {
+                    "200": {
+                        "description": "Vehicle event finalize response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "retval": {
+                                            "type": "integer"
+                                        },
+                                        "msg": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "nullable": true
+                                        },
+                                        "requestId": {
+                                            "type": "integer",
+                                            "nullable": true
+                                        }
+                                    },
+                                    "required": [
+                                        "status",
+                                        "retval",
+                                        "msg",
+                                        "data",
+                                        "requestId"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "eventId",
+                        "in": "path",
+                        "required": true,
+                        "description": "Vehicle event ID",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Vehicle event finalize payload",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "eventType": {
+                                        "type": "string"
+                                    },
+                                    "datetimeLocal": {
+                                        "type": "string"
+                                    },
+                                    "timezone": {
+                                        "type": "string"
+                                    },
+                                    "location": {
+                                        "type": "object",
+                                        "properties": {
+                                            "addressText": {
+                                                "type": "string"
+                                            },
+                                            "placeName": {
+                                                "type": "string",
+                                                "nullable": true
+                                            },
+                                            "lat": {
+                                                "type": "number"
+                                            },
+                                            "lon": {
+                                                "type": "number"
+                                            }
+                                        },
+                                        "required": [
+                                            "addressText",
+                                            "lat",
+                                            "lon"
+                                        ]
+                                    },
+                                    "purpose": {
+                                        "type": "string"
+                                    },
+                                    "notes": {
+                                        "type": "string",
+                                        "nullable": true
+                                    },
+                                    "odometer": {
+                                        "type": "integer",
+                                        "nullable": true
+                                    },
+                                    "money": {
+                                        "type": "object",
+                                        "properties": {
+                                            "total": {
+                                                "type": "number",
+                                                "nullable": true
+                                            },
+                                            "currency": {
+                                                "type": "string",
+                                                "nullable": true
+                                            }
+                                        }
+                                    },
+                                    "fueling": {
+                                        "type": "object",
+                                        "properties": {
+                                            "fuelingNo": {
+                                                "type": "integer",
+                                                "nullable": true
+                                            },
+                                            "fuelType": {
+                                                "type": "string",
+                                                "nullable": true
+                                            },
+                                            "volume": {
+                                                "type": "number",
+                                                "nullable": true
+                                            },
+                                            "unit": {
+                                                "type": "string",
+                                                "nullable": true
+                                            }
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "eventType",
+                                    "datetimeLocal",
+                                    "timezone",
+                                    "location"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": [
+                            "vehicle:update"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/vehicle/events": {
+            "post": {
+                "tags": [
+                    "Vehicle"
+                ],
+                "summary": "Create vehicle event without receipt image",
+                "operationId": "createVehicleEvent",
+                "responses": {
+                    "200": {
+                        "description": "Vehicle event create response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "retval": {
+                                            "type": "integer"
+                                        },
+                                        "msg": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "nullable": true
+                                        },
+                                        "requestId": {
+                                            "type": "integer",
+                                            "nullable": true
+                                        }
+                                    },
+                                    "required": [
+                                        "status",
+                                        "retval",
+                                        "msg",
+                                        "data",
+                                        "requestId"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "requestBody": {
+                    "description": "Vehicle event create payload",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "vehicleId": {
+                                        "type": "string"
+                                    },
+                                    "eventType": {
+                                        "type": "string"
+                                    },
+                                    "datetimeLocal": {
+                                        "type": "string"
+                                    },
+                                    "timezone": {
+                                        "type": "string"
+                                    },
+                                    "location": {
+                                        "type": "object",
+                                        "properties": {
+                                            "addressText": {
+                                                "type": "string"
+                                            },
+                                            "placeName": {
+                                                "type": "string",
+                                                "nullable": true
+                                            },
+                                            "lat": {
+                                                "type": "number"
+                                            },
+                                            "lon": {
+                                                "type": "number"
+                                            }
+                                        },
+                                        "required": [
+                                            "addressText",
+                                            "lat",
+                                            "lon"
+                                        ]
+                                    },
+                                    "purpose": {
+                                        "type": "string"
+                                    },
+                                    "notes": {
+                                        "type": "string",
+                                        "nullable": true
+                                    },
+                                    "odometer": {
+                                        "type": "integer",
+                                        "nullable": true
+                                    },
+                                    "money": {
+                                        "type": "object",
+                                        "properties": {
+                                            "total": {
+                                                "type": "number",
+                                                "nullable": true
+                                            },
+                                            "currency": {
+                                                "type": "string",
+                                                "nullable": true
+                                            }
+                                        }
+                                    },
+                                    "fueling": {
+                                        "type": "object",
+                                        "properties": {
+                                            "fuelingNo": {
+                                                "type": "integer",
+                                                "nullable": true
+                                            },
+                                            "fuelType": {
+                                                "type": "string",
+                                                "nullable": true
+                                            },
+                                            "volume": {
+                                                "type": "number",
+                                                "nullable": true
+                                            },
+                                            "unit": {
+                                                "type": "string",
+                                                "nullable": true
+                                            }
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "eventType",
+                                    "datetimeLocal",
+                                    "timezone",
+                                    "location"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": [
+                            "vehicle:create"
+                        ]
+                    }
+                ]
+            },
+            "get": {
+                "tags": [
+                    "Vehicle"
+                ],
+                "summary": "List vehicle events for the authenticated driver",
+                "operationId": "listVehicleEvents",
+                "responses": {
+                    "200": {
+                        "description": "Vehicle event list response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "retval": {
+                                            "type": "integer"
+                                        },
+                                        "msg": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "nullable": true
+                                        },
+                                        "requestId": {
+                                            "type": "integer",
+                                            "nullable": true
+                                        }
+                                    },
+                                    "required": [
+                                        "status",
+                                        "retval",
+                                        "msg",
+                                        "data",
+                                        "requestId"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "since",
+                        "in": "query",
+                        "required": false,
+                        "description": "Return events with event datetime greater than or equal to the provided local datetime",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "bearerAuth": [
+                            "vehicle:read"
+                        ]
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {},
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer"
+            }
+        }
+    }
+}

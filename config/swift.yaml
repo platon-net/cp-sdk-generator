@@ -1,0 +1,17 @@
+# OpenAPI Generator config for the Swift SDK.
+# Generator: swift6
+projectName: ControlPanelSDK
+podVersion: 1.0.0
+podAuthors: Platon Technologies
+podHomepage: https://github.com/platon-net/cp-swift-sdk
+podDocumentationURL: https://setup.platon.sk/api/openapi.json
+podSummary: Swift SDK for the Platon Control Panel API.
+podDescription: Generated Swift SDK for the Platon Control Panel API.
+library: urlsession
+responseAs: AsyncAwait
+useSPMFileStructure: true
+hideGenerationTimestamp: true
+sortModelPropertiesByRequiredFlag: true
+sortParamsByRequiredFlag: true
+enumUnknownDefaultCase: true
+disallowAdditionalPropertiesIfNotPresent: false

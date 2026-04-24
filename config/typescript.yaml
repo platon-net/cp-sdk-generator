@@ -1,0 +1,17 @@
+# OpenAPI Generator config for the TypeScript SDK.
+# Generator: typescript-axios
+npmName: cp-typescript-sdk
+npmVersion: 1.0.0
+apiPackage: api
+modelPackage: models
+withSeparateModelsAndApi: true
+withInterfaces: true
+useSingleRequestParameter: true
+supportsES6: true
+stringEnums: true
+paramNaming: camelCase
+enumPropertyNaming: PascalCase
+sortModelPropertiesByRequiredFlag: true
+sortParamsByRequiredFlag: true
+enumUnknownDefaultCase: true
+disallowAdditionalPropertiesIfNotPresent: false

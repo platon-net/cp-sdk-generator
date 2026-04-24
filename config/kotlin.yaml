@@ -1,0 +1,14 @@
+# OpenAPI Generator config for the Kotlin SDK.
+groupId: sk.platon
+artifactId: cp-kotlin-sdk
+artifactVersion: 1.0.0
+packageName: sk.platon.controlpanel.sdk
+library: jvm-okhttp4
+serializationLibrary: moshi
+dateLibrary: java8
+sourceFolder: src/main/kotlin
+collectionType: list
+sortModelPropertiesByRequiredFlag: true
+sortParamsByRequiredFlag: true
+enumPropertyNaming: original
+nonPublicApi: false

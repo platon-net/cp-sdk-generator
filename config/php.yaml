@@ -1,0 +1,17 @@
+# OpenAPI Generator config for the PHP SDK.
+packageName: ControlPanelSDK
+invokerPackage: Platon\\ControlPanel\\Sdk
+apiPackage: Api
+modelPackage: Model
+composerPackageName: platon-net/cp-php-sdk
+artifactVersion: 1.0.0
+artifactUrl: https://github.com/platon-net/cp-php-sdk
+developerOrganization: Platon Technologies
+developerOrganizationUrl: https://www.platon.sk
+srcBasePath: src
+library: guzzle
+hideGenerationTimestamp: true
+sortModelPropertiesByRequiredFlag: true
+sortParamsByRequiredFlag: true
+enumUnknownDefaultCase: true
+disallowAdditionalPropertiesIfNotPresent: false
