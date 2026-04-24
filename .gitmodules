@@ -1,0 +1,12 @@
+[submodule "sdk/php"]
+	path = sdk/php
+	url = https://github.com/platon-net/cp-php-sdk.git
+[submodule "sdk/typescript"]
+	path = sdk/typescript
+	url = https://github.com/platon-net/cp-typescript-sdk.git
+[submodule "sdk/kotlin"]
+	path = sdk/kotlin
+	url = https://github.com/platon-net/cp-kotlin-sdk.git
+[submodule "sdk/swift"]
+	path = sdk/swift
+	url = https://github.com/platon-net/cp-swift-sdk.git
