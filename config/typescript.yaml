@@ -1,6 +1,6 @@
 # OpenAPI Generator config for the TypeScript SDK.
 # Generator: typescript-axios
-npmName: cp-typescript-sdk
+npmName: "@platon-net/cp-typescript-sdk"
 npmVersion: 1.0.0
 apiPackage: api
 modelPackage: models
