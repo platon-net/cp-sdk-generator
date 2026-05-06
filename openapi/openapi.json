@@ -169,6 +169,76 @@
                 }
             }
         },
+        "/auth/token": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Create anonymous auth token",
+                "operationId": "createAuthToken",
+                "responses": {
+                    "200": {
+                        "description": "Anonymous auth token response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "retval": {
+                                            "type": "integer"
+                                        },
+                                        "msg": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "nullable": true,
+                                            "properties": {
+                                                "token_type": {
+                                                    "type": "string"
+                                                },
+                                                "token": {
+                                                    "type": "string"
+                                                },
+                                                "expires_in": {
+                                                    "type": "integer"
+                                                },
+                                                "token_expire": {
+                                                    "type": "string"
+                                                },
+                                                "cname": {
+                                                    "type": "string"
+                                                },
+                                                "scopes": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "requestId": {
+                                            "type": "integer",
+                                            "nullable": true
+                                        }
+                                    },
+                                    "required": [
+                                        "status",
+                                        "retval",
+                                        "msg",
+                                        "data",
+                                        "requestId"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/oauth/scopes": {
             "get": {
                 "tags": [
@@ -1277,6 +1347,116 @@
                 ]
             }
         },
+        "/domains/{domain}/whois": {
+            "get": {
+                "tags": [
+                    "Domain"
+                ],
+                "summary": "Check domain WHOIS availability and prices",
+                "operationId": "whoisDomain",
+                "responses": {
+                    "200": {
+                        "description": "Domain WHOIS response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "retval": {
+                                            "type": "integer"
+                                        },
+                                        "msg": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "nullable": true,
+                                            "properties": {
+                                                "domain": {
+                                                    "type": "string"
+                                                },
+                                                "isFree": {
+                                                    "type": "boolean"
+                                                },
+                                                "isPremium": {
+                                                    "type": "boolean"
+                                                },
+                                                "result": {
+                                                    "type": "integer"
+                                                },
+                                                "retval": {
+                                                    "type": [
+                                                        "string",
+                                                        "integer",
+                                                        "null"
+                                                    ]
+                                                },
+                                                "prices": {
+                                                    "type": [
+                                                        "object",
+                                                        "null"
+                                                    ]
+                                                }
+                                            }
+                                        },
+                                        "requestId": {
+                                            "type": "integer",
+                                            "nullable": true
+                                        }
+                                    },
+                                    "required": [
+                                        "status",
+                                        "retval",
+                                        "msg",
+                                        "data",
+                                        "requestId"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "domain",
+                        "in": "path",
+                        "required": true,
+                        "description": "Domain name",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "cname",
+                        "in": "query",
+                        "required": false,
+                        "description": "Customer name for price context",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "currency_id",
+                        "in": "query",
+                        "required": false,
+                        "description": "Currency ID",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "bearerAuth": [
+                            "domain:read"
+                        ]
+                    }
+                ]
+            }
+        },
         "/domains/{domain}/register": {
             "post": {
                 "tags": [
@@ -1642,6 +1822,907 @@
                     {
                         "bearerAuth": [
                             "domain:read"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/cart/items": {
+            "post": {
+                "tags": [
+                    "Cart"
+                ],
+                "summary": "Add item to cart",
+                "operationId": "createCartItem",
+                "responses": {
+                    "200": {
+                        "description": "Cart item add response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "retval": {
+                                            "type": "integer"
+                                        },
+                                        "msg": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "nullable": true
+                                        },
+                                        "requestId": {
+                                            "type": "integer",
+                                            "nullable": true
+                                        }
+                                    },
+                                    "required": [
+                                        "status",
+                                        "retval",
+                                        "msg",
+                                        "data",
+                                        "requestId"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "requestBody": {
+                    "description": "Cart item add payload",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "cname": {
+                                        "type": "string"
+                                    },
+                                    "product_name": {
+                                        "type": "string"
+                                    },
+                                    "domain": {
+                                        "type": "string"
+                                    },
+                                    "item_count": {
+                                        "type": "integer"
+                                    },
+                                    "currency_id": {
+                                        "type": "string"
+                                    },
+                                    "parameters": {
+                                        "type": "object"
+                                    },
+                                    "process_type": {
+                                        "type": "string"
+                                    },
+                                    "lang": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "product_name"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": [
+                            "cart:create"
+                        ]
+                    }
+                ]
+            },
+            "get": {
+                "tags": [
+                    "Cart"
+                ],
+                "summary": "List cart items",
+                "operationId": "listCartItems",
+                "responses": {
+                    "200": {
+                        "description": "Cart item list response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "retval": {
+                                            "type": "integer"
+                                        },
+                                        "msg": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "nullable": true
+                                        },
+                                        "requestId": {
+                                            "type": "integer",
+                                            "nullable": true
+                                        }
+                                    },
+                                    "required": [
+                                        "status",
+                                        "retval",
+                                        "msg",
+                                        "data",
+                                        "requestId"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "cname",
+                        "in": "query",
+                        "required": false,
+                        "description": "Customer name",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "lang",
+                        "in": "query",
+                        "required": false,
+                        "description": "Response language",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "bearerAuth": [
+                            "cart:read"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/cart/items/merge": {
+            "post": {
+                "tags": [
+                    "Cart"
+                ],
+                "summary": "Merge anonymous cart items into current customer cart",
+                "operationId": "mergeCartItems",
+                "responses": {
+                    "200": {
+                        "description": "Cart merge response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "retval": {
+                                            "type": "integer"
+                                        },
+                                        "msg": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "nullable": true,
+                                            "properties": {
+                                                "status": {
+                                                    "type": "string"
+                                                },
+                                                "merged": {
+                                                    "type": "boolean"
+                                                },
+                                                "from_cname": {
+                                                    "type": "string"
+                                                },
+                                                "to_cname": {
+                                                    "type": "string"
+                                                },
+                                                "moved_items": {
+                                                    "type": "integer"
+                                                },
+                                                "merged_items": {
+                                                    "type": "integer"
+                                                },
+                                                "items_count": {
+                                                    "type": "integer"
+                                                }
+                                            }
+                                        },
+                                        "requestId": {
+                                            "type": "integer",
+                                            "nullable": true
+                                        }
+                                    },
+                                    "required": [
+                                        "status",
+                                        "retval",
+                                        "msg",
+                                        "data",
+                                        "requestId"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Missing or invalid from_token",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "retval": {
+                                            "type": "integer"
+                                        },
+                                        "msg": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "nullable": true
+                                        },
+                                        "requestId": {
+                                            "type": "integer",
+                                            "nullable": true
+                                        }
+                                    },
+                                    "required": [
+                                        "status",
+                                        "retval",
+                                        "msg",
+                                        "data",
+                                        "requestId"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Missing or invalid customer Bearer token",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "retval": {
+                                            "type": "integer"
+                                        },
+                                        "msg": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "nullable": true
+                                        },
+                                        "requestId": {
+                                            "type": "integer",
+                                            "nullable": true
+                                        }
+                                    },
+                                    "required": [
+                                        "status",
+                                        "retval",
+                                        "msg",
+                                        "data",
+                                        "requestId"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal cart merge error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "retval": {
+                                            "type": "integer"
+                                        },
+                                        "msg": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "nullable": true
+                                        },
+                                        "requestId": {
+                                            "type": "integer",
+                                            "nullable": true
+                                        }
+                                    },
+                                    "required": [
+                                        "status",
+                                        "retval",
+                                        "msg",
+                                        "data",
+                                        "requestId"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "requestBody": {
+                    "description": "Anonymous cart merge payload",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "from_token": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "from_token"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": [
+                            "cart:update"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/cart/items/{cartItemId}": {
+            "delete": {
+                "tags": [
+                    "Cart"
+                ],
+                "summary": "Remove item from cart",
+                "operationId": "deleteCartItem",
+                "responses": {
+                    "200": {
+                        "description": "Cart item remove response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "retval": {
+                                            "type": "integer"
+                                        },
+                                        "msg": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "nullable": true
+                                        },
+                                        "requestId": {
+                                            "type": "integer",
+                                            "nullable": true
+                                        }
+                                    },
+                                    "required": [
+                                        "status",
+                                        "retval",
+                                        "msg",
+                                        "data",
+                                        "requestId"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "cartItemId",
+                        "in": "path",
+                        "required": true,
+                        "description": "Cart item ID",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "cname",
+                        "in": "query",
+                        "required": false,
+                        "description": "Customer name",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "bearerAuth": [
+                            "cart:delete"
+                        ]
+                    }
+                ]
+            },
+            "patch": {
+                "tags": [
+                    "Cart"
+                ],
+                "summary": "Update cart item data",
+                "operationId": "updateCartItem",
+                "responses": {
+                    "200": {
+                        "description": "Cart item update response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "retval": {
+                                            "type": "integer"
+                                        },
+                                        "msg": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "nullable": true
+                                        },
+                                        "requestId": {
+                                            "type": "integer",
+                                            "nullable": true
+                                        }
+                                    },
+                                    "required": [
+                                        "status",
+                                        "retval",
+                                        "msg",
+                                        "data",
+                                        "requestId"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "cartItemId",
+                        "in": "path",
+                        "required": true,
+                        "description": "Cart item ID",
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "description": "Cart item update payload",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "cname": {
+                                        "type": "string"
+                                    },
+                                    "data": {
+                                        "type": "object",
+                                        "properties": {
+                                            "product_name": {
+                                                "type": "string"
+                                            },
+                                            "product_detail": {
+                                                "type": "string"
+                                            },
+                                            "item_count": {
+                                                "type": "integer"
+                                            },
+                                            "price": {
+                                                "type": "number"
+                                            },
+                                            "product_price": {
+                                                "type": "number"
+                                            }
+                                        }
+                                    }
+                                },
+                                "required": [
+                                    "data"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": [
+                            "cart:update"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/cart/items/by-product/count": {
+            "patch": {
+                "tags": [
+                    "Cart"
+                ],
+                "summary": "Update cart item count by product and domain",
+                "operationId": "updateCartItemCount",
+                "responses": {
+                    "200": {
+                        "description": "Cart item count update response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "retval": {
+                                            "type": "integer"
+                                        },
+                                        "msg": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "nullable": true
+                                        },
+                                        "requestId": {
+                                            "type": "integer",
+                                            "nullable": true
+                                        }
+                                    },
+                                    "required": [
+                                        "status",
+                                        "retval",
+                                        "msg",
+                                        "data",
+                                        "requestId"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "requestBody": {
+                    "description": "Cart item count update payload",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "cname": {
+                                        "type": "string"
+                                    },
+                                    "product_name": {
+                                        "type": "string"
+                                    },
+                                    "domain": {
+                                        "type": "string"
+                                    },
+                                    "count": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "required": [
+                                    "product_name",
+                                    "domain",
+                                    "count"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": [
+                            "cart:update"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/cart/total": {
+            "get": {
+                "tags": [
+                    "Cart"
+                ],
+                "summary": "Get cart total",
+                "operationId": "getCartTotal",
+                "responses": {
+                    "200": {
+                        "description": "Cart total response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "retval": {
+                                            "type": "integer"
+                                        },
+                                        "msg": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "nullable": true
+                                        },
+                                        "requestId": {
+                                            "type": "integer",
+                                            "nullable": true
+                                        }
+                                    },
+                                    "required": [
+                                        "status",
+                                        "retval",
+                                        "msg",
+                                        "data",
+                                        "requestId"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "cname",
+                        "in": "query",
+                        "required": false,
+                        "description": "Customer name",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "bearerAuth": [
+                            "cart:read"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/cart/coupons/check": {
+            "post": {
+                "tags": [
+                    "Cart"
+                ],
+                "summary": "Check and apply cart coupon",
+                "operationId": "checkCartCoupon",
+                "responses": {
+                    "200": {
+                        "description": "Cart coupon check response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "retval": {
+                                            "type": "integer"
+                                        },
+                                        "msg": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "nullable": true
+                                        },
+                                        "requestId": {
+                                            "type": "integer",
+                                            "nullable": true
+                                        }
+                                    },
+                                    "required": [
+                                        "status",
+                                        "retval",
+                                        "msg",
+                                        "data",
+                                        "requestId"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "requestBody": {
+                    "description": "Cart coupon check payload",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "cname": {
+                                        "type": "string"
+                                    },
+                                    "coupon_code": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "coupon_code"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": [
+                            "cart:update"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/cart/coupons/current": {
+            "get": {
+                "tags": [
+                    "Cart"
+                ],
+                "summary": "Get current cart coupon",
+                "operationId": "getCartCoupon",
+                "responses": {
+                    "200": {
+                        "description": "Current cart coupon response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "retval": {
+                                            "type": "integer"
+                                        },
+                                        "msg": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "nullable": true
+                                        },
+                                        "requestId": {
+                                            "type": "integer",
+                                            "nullable": true
+                                        }
+                                    },
+                                    "required": [
+                                        "status",
+                                        "retval",
+                                        "msg",
+                                        "data",
+                                        "requestId"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "cname",
+                        "in": "query",
+                        "required": false,
+                        "description": "Customer name",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "bearerAuth": [
+                            "cart:read"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/cart/billing-address": {
+            "get": {
+                "tags": [
+                    "Cart"
+                ],
+                "summary": "Get cart billing address",
+                "operationId": "getCartBillingAddress",
+                "responses": {
+                    "200": {
+                        "description": "Cart billing address response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "retval": {
+                                            "type": "integer"
+                                        },
+                                        "msg": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "nullable": true
+                                        },
+                                        "requestId": {
+                                            "type": "integer",
+                                            "nullable": true
+                                        }
+                                    },
+                                    "required": [
+                                        "status",
+                                        "retval",
+                                        "msg",
+                                        "data",
+                                        "requestId"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "parameters": [
+                    {
+                        "name": "cname",
+                        "in": "query",
+                        "required": false,
+                        "description": "Customer name",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "security": [
+                    {
+                        "bearerAuth": [
+                            "cart:read"
                         ]
                     }
                 ]
@@ -2545,6 +3626,125 @@
                     {
                         "bearerAuth": [
                             "vehicle:read"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/llm/spam-detection": {
+            "post": {
+                "tags": [
+                    "LLM"
+                ],
+                "summary": "Classify a web form message as spam or ham using the local LLM",
+                "operationId": "spamDetection",
+                "responses": {
+                    "200": {
+                        "description": "Spam detection response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "retval": {
+                                            "type": "integer"
+                                        },
+                                        "msg": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "nullable": true,
+                                            "properties": {
+                                                "classification": {
+                                                    "type": "string",
+                                                    "enum": [
+                                                        "spam",
+                                                        "ham",
+                                                        "unknown"
+                                                    ],
+                                                    "description": "Normalized classification returned by the LLM."
+                                                },
+                                                "confidence": {
+                                                    "type": "number",
+                                                    "minimum": 0,
+                                                    "maximum": 100,
+                                                    "description": "Normalized confidence from 0 to 100."
+                                                },
+                                                "reason": {
+                                                    "type": "string",
+                                                    "description": "Short explanation in Slovak."
+                                                },
+                                                "signals": {
+                                                    "type": "array",
+                                                    "description": "Most important signals used for the classification.",
+                                                    "items": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "error": {
+                                                    "type": "boolean",
+                                                    "description": "True when the LLM call or response validation failed."
+                                                },
+                                                "error_message": {
+                                                    "type": "string",
+                                                    "description": "Short technical error reason. Raw LLM response is never returned here."
+                                                }
+                                            },
+                                            "required": [
+                                                "classification",
+                                                "confidence",
+                                                "reason",
+                                                "signals",
+                                                "error",
+                                                "error_message"
+                                            ]
+                                        },
+                                        "requestId": {
+                                            "type": "integer",
+                                            "nullable": true
+                                        }
+                                    },
+                                    "required": [
+                                        "status",
+                                        "retval",
+                                        "msg",
+                                        "data",
+                                        "requestId"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "requestBody": {
+                    "description": "Spam detection payload",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "message": {
+                                        "type": "string",
+                                        "description": "Text message submitted via a web form. The value is treated strictly as text data.",
+                                        "maxLength": 20000
+                                    }
+                                },
+                                "required": [
+                                    "message"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": [
+                            "llm:complete"
                         ]
                     }
                 ]
