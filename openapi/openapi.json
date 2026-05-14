@@ -3631,6 +3631,237 @@
                 ]
             }
         },
+        "/antispam/maildata/check": {
+            "post": {
+                "tags": [
+                    "Antispam"
+                ],
+                "summary": "Check maildata against existing antispam rules",
+                "operationId": "checkAntispamMaildataRules",
+                "responses": {
+                    "200": {
+                        "description": "Maildata antispam check response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "retval": {
+                                            "type": "integer"
+                                        },
+                                        "msg": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "nullable": true
+                                        },
+                                        "requestId": {
+                                            "type": "integer",
+                                            "nullable": true
+                                        }
+                                    },
+                                    "required": [
+                                        "status",
+                                        "retval",
+                                        "msg",
+                                        "data",
+                                        "requestId"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "requestBody": {
+                    "description": "Maildata payload",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "maildata": {
+                                        "type": "object",
+                                        "description": "Structured mail metadata with sender/recipient/email/domain/ip fields.",
+                                        "additionalProperties": true
+                                    }
+                                },
+                                "required": [
+                                    "maildata"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": [
+                            "antispam:read"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/antispam/maildata": {
+            "post": {
+                "tags": [
+                    "Antispam"
+                ],
+                "summary": "Add maildata to antispam engine",
+                "operationId": "addAntispamMaildata",
+                "responses": {
+                    "200": {
+                        "description": "Antispam maildata add response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "retval": {
+                                            "type": "integer"
+                                        },
+                                        "msg": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "nullable": true
+                                        },
+                                        "requestId": {
+                                            "type": "integer",
+                                            "nullable": true
+                                        }
+                                    },
+                                    "required": [
+                                        "status",
+                                        "retval",
+                                        "msg",
+                                        "data",
+                                        "requestId"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "requestBody": {
+                    "description": "Maildata payload",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "maildata": {
+                                        "type": "object",
+                                        "additionalProperties": true
+                                    }
+                                },
+                                "required": [
+                                    "maildata"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": [
+                            "antispam:create"
+                        ]
+                    }
+                ]
+            }
+        },
+        "/antispam/rules": {
+            "post": {
+                "tags": [
+                    "Antispam"
+                ],
+                "summary": "Create antispam email rule or increment existing rule hitcount",
+                "operationId": "createAntispamEmailRule",
+                "responses": {
+                    "200": {
+                        "description": "Antispam rule create response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "status": {
+                                            "type": "string"
+                                        },
+                                        "retval": {
+                                            "type": "integer"
+                                        },
+                                        "msg": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "nullable": true
+                                        },
+                                        "requestId": {
+                                            "type": "integer",
+                                            "nullable": true
+                                        }
+                                    },
+                                    "required": [
+                                        "status",
+                                        "retval",
+                                        "msg",
+                                        "data",
+                                        "requestId"
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "requestBody": {
+                    "description": "Antispam email rule payload",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "type": {
+                                        "type": "string",
+                                        "enum": [
+                                            "sender_email",
+                                            "sender_domain",
+                                            "sender_ip"
+                                        ]
+                                    },
+                                    "pattern": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "type",
+                                    "pattern"
+                                ]
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": [
+                            "antispam:create"
+                        ]
+                    }
+                ]
+            }
+        },
         "/llm/spam-detection": {
             "post": {
                 "tags": [
